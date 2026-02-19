@@ -1,13 +1,13 @@
 # Unsupervised Learning —— Echo Classification For Sea-ice and Lead
 This project applies unsupervised learning to classify radar echo waveforms into leads and sea ice, using the notebook codings as a starting point. We will preprocess and represent echoes with dimensionality reduction and clustering, then compute the mean echo shape and standard deviation for each class to summarise their typical signatures. Finally, we will evaluate our classification against the ESA official labels using a confusion matrix (and standard metrics).
 ## Table of Contents
-- [Unsupervised Learning introduction](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#unsupervised-learning-introduction)
-  - [K-means Clustering](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#introduction-to-k-means-clustering)
-  - [Gaussian Mixture Models (GMM)](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#gaussian-mixture-models-gmm)
-- [Getting Started](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#getting-started)
-- [Expected Results](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#expected-results-using-gmm-model-as-the-example)
-- [Contact](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#contact)
-- [Acknowledgement](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#acknowledgement)
+- [Unsupervised Learning introduction](#unsupervised-learning-introduction)
+  - [K-means Clustering](#introduction-to-k-means-clustering)
+  - [Gaussian Mixture Models (GMM)](#gaussian-mixture-models-gmm)
+- [Getting Started](#getting-started)
+- [Expected Results](#expected-results-using-gmm-model-as-the-example)
+- [Contact](#contact)
+- [Acknowledgement](#acknowledgement)
 
 ## Unsupervised Learning introduction
 
