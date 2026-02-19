@@ -1,8 +1,8 @@
 # Unsupervised Learning —— Echo Classification For Sea-ice and Lead
 This project applies unsupervised learning to classify radar echo waveforms into leads and sea ice, using the notebook codings as a starting point. We will preprocess and represent echoes with dimensionality reduction and clustering, then compute the mean echo shape and standard deviation for each class to summarise their typical signatures. Finally, we will evaluate our classification against the ESA official labels using a confusion matrix (and standard metrics).
 ## Table of Contents
-- Unsupervised Learning introduction
-  - [K-means Clustering](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#unsupervised-learning-introduction)
+- [Unsupervised Learning introduction](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#table-of-contents)
+  - [K-means Clustering](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#introduction-to-k-means-clustering)
   - [Gaussian Mixture Models (GMM)](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#gaussian-mixture-models-gmm)
 - [Getting Started](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#getting-started)
 - [Expected Results](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#expected-results-using-gmm-model-as-the-example)
@@ -10,6 +10,8 @@ This project applies unsupervised learning to classify radar echo waveforms into
 - [Acknowledgement](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#acknowledgement)
 
 ## Unsupervised Learning introduction
+
+## Introduction to K-means Clustering
 K-means clustering is a type of unsupervised learning algorithm used for partitioning a dataset into a set of k groups (or clusters), where k represents the number of groups pre-specified by the analyst. It classifies the data points based on the similarity of the features of the data {cite}macqueen1967some. The basic idea is to define k centroids, one for each cluster, and then assign each data point to the nearest centroid, while keeping the centroids as small as possible.
 
 ### Why K-means for Clustering?
@@ -54,7 +56,7 @@ This process is repeated until convergence, meaning the parameters do not signif
 
 ## Getting Started
 1. Open Notebook\
-   Open the [notebook]() through **Google Colab**. It is a free, browser-based Jupyter environment that lets you run Python notebooks with no local setup and easy access to Google Drive
+   Open the [notebook](Chapter1_Unsupervised_Learning_Methods.ipynb) through **Google Colab**. It is a free, browser-based Jupyter environment that lets you run Python notebooks with no local setup and easy access to Google Drive
 2. Mount Google Drive\
    Use the codes below to mount your google drive to your notebook, so that it can access all your resources.
    ```
@@ -68,10 +70,10 @@ This process is repeated until convergence, meaning the parameters do not signif
    pip install netCDF4
    ```
 4. Implementation\
-   Running the codes in the notebook to get the clustering results of two different methods.
+   Running the codes in the notebook to get the clustering results of [K-means Clustering](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#introduction-to-k-means-clustering) and [Gaussian Mixture Models (GMM)](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#gaussian-mixture-models-gmm).
 
 ## Expected results (Using GMM model as the example)
-1. This cell plots every cleaned echo waveform on the same axes
+**1. This cell plots every cleaned echo waveform on the same axes**
 ```
 x = np.stack([np.arange(1,waves_cleaned.shape[1]+1)]*waves_cleaned.shape[0])
 plt.plot(x,waves_cleaned)  # plot of all the echos
@@ -79,7 +81,7 @@ plt.show()
 ```
 ![all](Images/all.png)
 
-2. Plotting echos for the lead cluster
+**2. Plotting echos for the lead cluster**
 ```
 x = np.stack([np.arange(1,waves_cleaned[clusters_gmm==1].shape[1]+1)]*waves_cleaned[clusters_gmm==1].shape[0])
 plt.plot(x,waves_cleaned[clusters_gmm==1])  # plot of all the echos
@@ -87,7 +89,7 @@ plt.show()
 ```
 ![lead](Images/lead.png)
 
-3. Plotting echos for the sea ice cluster
+**3. Plotting echos for the sea ice cluster**
 ```
 x = np.stack([np.arange(1,waves_cleaned[clusters_gmm==0].shape[1]+1)]*waves_cleaned[clusters_gmm==0].shape[0])
 plt.plot(x,waves_cleaned[clusters_gmm==0])  # plot of all the echos
@@ -95,7 +97,7 @@ plt.show()
 ```
 ![ice](Images/ice.png)
 
-4. Plotting the average echo waveform shape for each GMM cluster (one treated as “ice”, the other as “lead”), with the shaded band indicating ±1 standard deviation across all echoes assigned to that class.
+**4. Plotting the average echo waveform shape for each GMM cluster (one treated as “ice”, the other as “lead”), with the shaded band indicating ±1 standard deviation across all echoes assigned to that class.**
 ```
 # mean and standard deviation for all echoes
 mean_ice = np.mean(waves_cleaned[clusters_gmm==0],axis=0)
@@ -116,7 +118,7 @@ plt.legend()
 ```
 ![mean&sd](Images/mean&sd.png)
 
-5. The generated figure demonstrates whether our alignment step actually improves waveform registration
+**5. The generated figure demonstrates whether our alignment step actually improves waveform registration**
 ```
 # ============================================================
 # Aggregate alignment comparison
@@ -177,7 +179,7 @@ plt.show()
 ```
 ![comparison](Images/Comparison.png)
 
-6. Evaluating how well your GMM clustering matches the ESA official classes
+**6. Evaluating how well your GMM clustering matches the ESA official classes**
 ```
 flag_cleaned_modified = flag_cleaned - 1
 
