@@ -75,18 +75,24 @@ x = np.stack([np.arange(1,waves_cleaned.shape[1]+1)]*waves_cleaned.shape[0])
 plt.plot(x,waves_cleaned)  # plot of all the echos
 plt.show()
 ```
+![all](Images/all.png)
+
 2. Plotting echos for the lead cluster
 ```
 x = np.stack([np.arange(1,waves_cleaned[clusters_gmm==1].shape[1]+1)]*waves_cleaned[clusters_gmm==1].shape[0])
 plt.plot(x,waves_cleaned[clusters_gmm==1])  # plot of all the echos
 plt.show()
 ```
+![lead](Images/lead.png)
+
 3. Plotting echos for the sea ice cluster
 ```
 x = np.stack([np.arange(1,waves_cleaned[clusters_gmm==0].shape[1]+1)]*waves_cleaned[clusters_gmm==0].shape[0])
 plt.plot(x,waves_cleaned[clusters_gmm==0])  # plot of all the echos
 plt.show()
 ```
+![ice](Images/ice.png)
+
 4. Plotting the average echo waveform shape for each GMM cluster (one treated as “ice”, the other as “lead”), with the shaded band indicating ±1 standard deviation across all echoes assigned to that class.
 ```
 # mean and standard deviation for all echoes
@@ -106,3 +112,97 @@ plt.fill_between(range(len(mean_lead)), mean_lead - std_lead, mean_lead + std_le
 plt.title('Plot of mean and standard deviation for each class')
 plt.legend()
 ```
+![mean&sd](Images/mean&sd.png)
+
+5. The generated figure demonstrates whether our alignment step actually improves waveform registration
+```
+# ============================================================
+# Aggregate alignment comparison
+# ============================================================
+
+fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+n_img = min(1000, len(waves_norm))
+
+# --- Top left: original waveform image ---
+ax = axes[0, 0]
+im = ax.imshow(waves_norm[:n_img].T, origin='lower', aspect='auto',
+               cmap='viridis', vmin=0, vmax=1)
+ax.set_title('Original Waveforms')
+ax.set_xlabel('Waveform Index')
+ax.set_ylabel('Range Bin')
+plt.colorbar(im, ax=ax, label='Normalised Power')
+
+# --- Top right: aligned waveform image ---
+ax = axes[0, 1]
+im = ax.imshow(waves_aligned[:n_img].T, origin='lower', aspect='auto',
+               cmap='viridis', vmin=0, vmax=1)
+ax.set_title('Aligned Waveforms')
+ax.set_xlabel('Waveform Index')
+ax.set_ylabel('Range Bin')
+plt.colorbar(im, ax=ax, label='Normalised Power')
+
+# --- Bottom left: peak position histograms ---
+ax = axes[1, 0]
+ax.hist(peaks_before, bins=50, alpha=0.6, color='steelblue',
+        label=f'Before ($\sigma$={np.std(peaks_before):.1f} bins)')
+ax.hist(peaks_after,  bins=50, alpha=0.6, color='tomato',
+        label=f'After ($\sigma$={np.std(peaks_after):.1f} bins)')
+ax.set_xlabel('Peak Bin')
+ax.set_ylabel('Count')
+ax.set_title('Peak Position Distribution')
+ax.legend()
+
+# --- Bottom right: mean waveform by class, before vs after ---
+ax = axes[1, 1]
+xr = np.arange(n_bins)
+for cls, name, color in [(0, 'Sea Ice', 'green'), (1, 'Lead', 'blue')]:
+    cls_mask = clusters_gmm == cls
+    if np.sum(cls_mask) < 5:
+        continue
+    ax.plot(xr, np.nanmean(waves_norm[cls_mask], axis=0),
+            color=color, linestyle='-', alpha=0.5, label=f'{name} (original)')
+    ax.plot(xr, np.nanmean(waves_aligned[cls_mask], axis=0),
+            color=color, linestyle='--', linewidth=2, label=f'{name} (aligned)')
+ax.set_xlabel('Range Bin')
+ax.set_ylabel('Normalised Power')
+ax.set_title('Mean Waveform by Class')
+ax.legend(fontsize=8)
+ax.grid(True, alpha=0.3)
+
+plt.suptitle('Alignment Effect: Aggregate Comparison', fontsize=14)
+plt.tight_layout()
+plt.show()
+```
+![comparison]()
+
+6. Evaluating how well your GMM clustering matches the ESA official classes
+```
+flag_cleaned_modified = flag_cleaned - 1
+
+from sklearn.metrics import confusion_matrix, classification_report
+
+true_labels = flag_cleaned_modified   # true labels from the ESA dataset
+predicted_gmm = clusters_gmm          # predicted labels from GMM method
+
+# Compute confusion matrix
+conf_matrix = confusion_matrix(true_labels, predicted_gmm)
+
+# Print confusion matrix
+print("Confusion Matrix:")
+print(conf_matrix)
+
+# Compute classification report
+class_report = classification_report(true_labels, predicted_gmm)
+
+# Print classification report
+print("\nClassification Report:")
+print(class_report)
+```
+![ESA]()
+
+## Contact
+Moon Huang: zcfbhua@ucl.ac.uk
+Personal: moonhuangyh@gmail.com
+
+## Acknowledgement
+Thanks for the guidance from Dr. Michel Tsamados and the demonstrators.
