@@ -53,21 +53,21 @@ This process is repeated until convergence, meaning the parameters do not signif
 - **Cluster Shape Flexibility:** Can adapt to ellipsoidal cluster shapes, thanks to the flexible covariance structure.
 
 ## Getting Started
-1. Open Notebook
-   Open the notebook through **Google Colab**. It is a free, browser-based Jupyter environment that lets you run Python notebooks with no local setup and easy access to Google Drive
-2. Mount Google Drive
+1. Open Notebook\
+   Open the [notebook]() through **Google Colab**. It is a free, browser-based Jupyter environment that lets you run Python notebooks with no local setup and easy access to Google Drive
+2. Mount Google Drive\
    Use the codes below to mount your google drive to your notebook, so that it can access all your resources.
    ```
    from google.colab import drive
    drive.mount('/content/drive')
    ```
-3. Preinstallation
+3. Preinstallation\
    The following codes are required to be run to install the packages needed for this project.
    ```
    pip install rasterio
    pip install netCDF4
    ```
-4. Implementation
+4. Implementation\
    Running the codes in the notebook to get the clustering results of two different methods.
 
 ## Expected results (Using GMM model as the example)
