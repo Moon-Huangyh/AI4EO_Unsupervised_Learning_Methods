@@ -205,7 +205,7 @@ print(class_report)
 ![ESA](Images/ESA.png)
 
 ## Contact
-Moon Huang: zcfbhua@ucl.ac.uk
+Moon Huang: zcfbhua@ucl.ac.uk\
 Personal: moonhuangyh@gmail.com
 
 ## Acknowledgement
