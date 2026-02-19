@@ -6,6 +6,8 @@ This project applies unsupervised learning to classify radar echo waveforms into
   - [Gaussian Mixture Models (GMM)](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#gaussian-mixture-models-gmm)
 - [Getting Started](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#getting-started)
 - [Expected Results](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#expected-results-using-gmm-model-as-the-example)
+- [Contact](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#contact)
+- [Acknowledgement](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#acknowledgement)
 
 ## Unsupervised Learning introduction
 K-means clustering is a type of unsupervised learning algorithm used for partitioning a dataset into a set of k groups (or clusters), where k represents the number of groups pre-specified by the analyst. It classifies the data points based on the similarity of the features of the data {cite}macqueen1967some. The basic idea is to define k centroids, one for each cluster, and then assign each data point to the nearest centroid, while keeping the centroids as small as possible.
@@ -173,7 +175,7 @@ plt.suptitle('Alignment Effect: Aggregate Comparison', fontsize=14)
 plt.tight_layout()
 plt.show()
 ```
-![comparison]()
+![comparison](Images/Comparison.png)
 
 6. Evaluating how well your GMM clustering matches the ESA official classes
 ```
@@ -198,7 +200,7 @@ class_report = classification_report(true_labels, predicted_gmm)
 print("\nClassification Report:")
 print(class_report)
 ```
-![ESA]()
+![ESA](Images/ESA.png)
 
 ## Contact
 Moon Huang: zcfbhua@ucl.ac.uk
