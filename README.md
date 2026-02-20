@@ -70,7 +70,7 @@ This process is repeated until convergence, meaning the parameters do not signif
    pip install netCDF4
    ```
 4. Implementation\
-   Running the codes in the notebook to get the clustering results of [K-means Clustering](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#introduction-to-k-means-clustering) and [Gaussian Mixture Models (GMM)](https://github.com/Moon-Huangyh/AI4EO_Unsupervised_Learning_Methods/edit/main/README.md#gaussian-mixture-models-gmm).
+   Running the codes in the notebook to get the clustering results of [K-means Clustering](#introduction-to-k-means-clustering) and [Gaussian Mixture Models (GMM)](#gaussian-mixture-models-gmm).
 
 ## Expected results (Using GMM model as the example)
 **1. This cell plots every cleaned echo waveform on the same axes**
